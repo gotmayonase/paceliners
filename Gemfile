@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'jquery-rails'
 gem 'pg', '0.11.0'
 gem 'rails', '3.2.1'
 gem 'twitter-bootstrap-rails'
@@ -15,4 +18,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :development do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end

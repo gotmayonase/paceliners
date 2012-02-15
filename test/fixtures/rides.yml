@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  zipcode: MyString
+  name: MyString
+  distance: 9.99
+  time_of_day: 2012-02-14 20:14:06
+  day_of_week: MyString
+  start_date: 2012-02-14 20:14:06
+  end_date: 2012-02-14 20:14:06
+  drop: false
+  average_pace: 9.99
+  average_size: 1
+  address: MyString
+  city: MyString
+  state: MyString
+
+two:
+  zipcode: MyString
+  name: MyString
+  distance: 9.99
+  time_of_day: 2012-02-14 20:14:06
+  day_of_week: MyString
+  start_date: 2012-02-14 20:14:06
+  end_date: 2012-02-14 20:14:06
+  drop: false
+  average_pace: 9.99
+  average_size: 1
+  address: MyString
+  city: MyString
+  state: MyString

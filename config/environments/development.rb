@@ -35,3 +35,11 @@ Paceliners::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+class Rack::Request
+  
+  def ip
+    '75.65.59.45'
+  end
+  
+end

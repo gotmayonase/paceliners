@@ -1,0 +1,126 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require gmaps4rails
+ *= require_tree .
+*/
+
+
+@import url(http://fonts.googleapis.com/css?family=Sonsie+One);
+
+.navbar .brand {
+  font-family: 'Sonsie One';
+}
+
+.navbar .icon {
+  float: left;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.map_container {
+  width: 940px;
+  margin: 0 auto;
+}
+
+.infobox {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: 0 0 5px 5px #888;
+  -webkit-box-shadow: 0 0 5px 5px#888;
+  box-shadow: 0 0 5px 5px #888;
+}
+
+.infobox h2 {
+  font-size: 20px;
+  padding-top: 15px;
+  padding-left: 32px;
+  font-family: 'Sonsie One';
+}
+
+.infobox p {
+  margin: 0;
+}
+
+.infobox p span {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+}
+
+.infobox p .address {
+  width: auto;
+  margin-left: 30px;
+  font-weight: normal
+}
+
+.infobox h2.road {
+  background: url(<%= asset_path 'road-bike-small.png' %>) bottom left no-repeat;
+}
+
+.infobox h2.mountain {
+  background: url(<%= asset_path 'mountain-bike-small.png' %>) bottom left no-repeat;
+}
+
+.map-header {
+  text-align: center;
+  width: 940px;
+  margin: 0 auto 15px;
+}
+
+.map-header h1, .map-header h2 {
+  font-size: 24px;
+  color: #000;
+}
+
+.navbar .navbar-inner {
+  background-color: #104E8B;
+  background-image: -moz-linear-gradient(top, #003D9A, #103E8B);
+  background-image: -ms-linear-gradient(top, #003D9A, #103E8B);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#003D9A), to(#103E8B));
+  background-image: -webkit-linear-gradient(top, #003D9A, #103E8B);
+  background-image: -o-linear-gradient(top, #003D9A, #103E8B);
+  background-image: linear-gradient(top, #003D9A, #103E8B);
+}
+
+#navigation-bar .nav > li > a {
+  color: #ccc;
+  padding: 5px;
+  font-weight: bold;
+}
+
+#navigation-bar .nav > li > a:hover {
+  color: #fff;
+}
+
+#navigation-bar .nav > li:hover {
+  background-color: #002B49;
+}
+
+#navigation-bar .nav > li {
+  margin-top: 3px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #325FAD;
+  margin-right: 10px
+}
+
+
+
+footer {
+  margin: 50px auto 0;
+  text-align: center;
+}
