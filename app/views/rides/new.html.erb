@@ -1,0 +1,275 @@
+<%= content_for :scripts do %>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+  <script type="text/javascript">
+    $(function(){
+      $('.date').datepicker();
+      initialize();
+      $('form legend a').click(function(){
+        $('.adv-opts-container').slideToggle();
+        var $icon = $('i', this);
+        if($icon.hasClass('icon-plus')){
+          $icon.addClass('icon-minus');
+          $icon.removeClass('icon-plus');
+        } else {
+          $icon.addClass('icon-plus');
+          $icon.removeClass('icon-minus');
+        }
+        return false;
+      });
+      
+      $('input[type=radio]').click(function(){
+        var id = $(this).attr('rel');
+        $('.locationEntry').hide();
+        $('#' + id).show();
+      });
+    });
+    var map;
+    var service;
+    var autocomplete;
+    
+    function initialize() {
+      var location = new google.maps.LatLng(<%= current_location['latitude'] %>, <%= current_location['longitude'] %>);
+      map = new google.maps.Map(document.getElementById('map'), {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: location,
+        zoom: 10
+      });
+      
+      var marker = new google.maps.Marker({
+        map: map
+      });
+      var infowindow = new google.maps.InfoWindow({
+        pixelOffset: new google.maps.Size(0, 30)
+      });
+      service = new google.maps.places.PlacesService(map);
+      
+      var autocomplete_input = document.getElementById('ride_location');
+      var boundsCircle = new google.maps.Circle({center: location, radius: 50000})
+      options = { bounds: boundsCircle.getBounds() }
+      autocomplete = new google.maps.places.Autocomplete(autocomplete_input, options);
+      
+      
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(10);
+        }
+
+        marker.setPosition(place.geometry.location);
+        
+        console.log(place);
+        
+        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address);
+        infowindow.open(map, marker);
+
+        $('#ride_latitude').val(place.geometry.location.lat());
+        $('#ride_longitude').val(place.geometry.location.lng());
+        $('#ride_address_name').val($(autocomplete_input).val());
+        
+        service.getDetails
+      });
+      
+      google.maps.event.addDomListener(autocomplete_input, 'keydown', function(e) { 
+        if (e.keyCode == 13) 
+        { 
+          if (e.preventDefault) 
+          { 
+            e.preventDefault(); 
+          } 
+          else 
+          { 
+            // Since the google event handler framework does not handle 
+            e.cancelBubble = true; 
+            e.returnValue = false; 
+          } 
+        } 
+      });
+    }
+
+    function callback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          var place = results[i];
+          createMarker(results[i]); 
+        }
+      }
+    }
+  </script>
+<% end %>
+<div class="row" style="text-align: center">
+  <div class="span9" style="margin: 0 auto; float: none;">
+    <form class="well form-horizontal" action="<%= rides_path %>" id="new_ride" style="text-align: left" method="post">
+      <header class="form-header">
+        <h1>Add a Ride</h1>
+      </header>
+      
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label">Name</label>
+          <div class="controls">
+            <input type="text" class="span3" name="ride[name]" />
+            <p class="help-block">ex. Your bike club or bike shop name</p>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <label class="control-label">Distance</label>
+          <div class="controls">
+            <div class="input-append">
+              <input type="text" class="span1" name="ride[ride_distance]" />
+              <span class="add-on">miles</span>
+            </div>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <label class="control-label">Day of the Week</label>
+          <div class="controls">
+            <% Ride::DAYS.each do |day_key, day| %>
+            <label class="checkbox inline">
+              <input type="checkbox" value="<%= day_key %>" name="ride[days][]"/>
+              <%= day %>
+            </label>
+            <% end %>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <label class="control-label">Time of Day</label>
+          <div class="controls">
+            <select class="span1" name="ride[time][hour]">
+              <% (1..12).each do |hour| %>
+              <option value="<%= hour %>"><%= hour %></option>
+              <% end %>
+            </select>
+            :
+            <select class="span1" name="ride[time][minute]">
+              <% [0,15,30,45].each do |minute| %>
+              <option value="<%= minute %>"><%= "%02d" % minute %></option>
+              <% end %>
+            </select>
+            <select class="span1" name="ride[time][period]">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <label class="control-label">Ride Type</label>
+          <div class="controls">
+            <select name="ride[bike_type]" class="span2">
+              <option>Road</option>
+              <option>Mountain</option>
+            </select>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <label class="control-label">Starting Location</label>
+          <div class="controls">
+            <label class="radio">
+              <input type="radio" name="locOptions" rel="googleMapSearch" checked/>
+              Search for your location with Google Maps
+            </label>
+            <label class="radio">
+              <input type="radio" name="locOptions" rel="manualAddressEntry" />
+              Enter the address manually
+            </label>
+            <input type="hidden" name="ride[latitude]" id="ride_latitude" />
+            <input type="hidden" name="ride[longitude]" id="ride_longitude" />
+          </div>
+        </div>
+        <div id="googleMapSearch" class="locationEntry">
+          <div class="control-group">
+            <div class="controls">
+              <input type="text" id="ride_location" class="span6" name="ride[address_name]" placeholder="Enter the place your ride begins, either an address or name"/>
+            </div>
+          </div>
+          <div class="map_container span6">
+            <div id="map"></div>
+          </div>
+        </div>
+        
+        <div id="manualAddressEntry" class="locationEntry" style="display: none;">
+          <div class="control-group">
+            <div class="controls">
+              <input type="text" name="ride[address_name]" id="ride_address_name" placeholder="Location Name" class="span4"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <input type="text" name="ride[address]" id="ride_address" placeholder="Street Address" class="span4"/>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <input type="text" name="ride[city]" id="ride_city" placeholder="City" class="span2" />
+              <input type="text" name="ride[state]" id="ride_state" placeholder="State" class="span1" />
+              <input type="text" name="ride[zipcode]" id="ride_zipcode" placeholder="Zip Code" class="span1" />
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset class="advanced-options">
+        <legend><a href=""><i class="icon-plus"></i> Optionals</a></legend>
+        <div class="adv-opts-container">
+          <div class="control-group">
+            <label class="control-group">Ride Dates</label>
+            <div class="controls">
+              <input type="text" name="ride[start_date]" class="date span1" placeholder="Start Date" />
+              -
+              <input type="text" name="ride[end_date]" class="date span1" placeholder="End Date" />
+              <p class="help-block">If your ride only runs through certain months of the year, set that here.</p>
+            </div>
+          </div>
+    
+          <div class="control-group">
+            <label class="control-group" for="ride_drop">Drop?</label>
+            <div class="controls">
+              <input type="checkbox" name="ride[drop]" id="ride_drop" />
+              <p class="help-block">If it's a no-drop ride, or you're unsure, leave it unchecked.</p>
+            </div>
+          </div>
+    
+          <div class="control-group">
+            <label class="control-label">Average Pace</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" class="span1" name="ride[average_pace]" />
+                <span class="add-on">mph</span>
+              </div>
+            </div>
+          </div>
+    
+          <div class="control-group">
+            <label class="control-label">Group Size</label>
+            <div class="controls">
+              <div class="input-append">
+                <input type="text" class="span1" name="ride[average_size]" />
+              </div>
+              <p class="help-block">How many people show up on average?</p>
+            </div>
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label">Website</label>
+            <div class="controls">
+              <input type="text" class="span3" name="ride[url]" />
+              <p class="help-block">If there's a website with more info, add the URL here</p>
+            </div>
+          </div>
+        </div> <!-- end adv-opts-container -->
+      </fieldset>
+      
+      <div class="form-actions">
+        <button type="submit" class='btn btn-primary btn-large'>Save Your Ride</save>
+      </div>
+    </form>
+  </div>
+</div>

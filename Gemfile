@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'jquery-rails'

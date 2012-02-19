@@ -1,0 +1,42 @@
+<!-- <div class="map-header">
+  <h1>Our spy satellites show you to be in <span><%= current_location['city']%>, <%= current_location['region_code']%> (<%= current_location['zipcode']%>)</span></h1>
+  <h2>Here are some rides in your area...</h2>
+</div> -->
+
+<header class="map-header">
+  <h1>Rides</h1>
+  <% if current_location %>
+  <h2><%= current_location['city']%>, <%= current_location['region_code']%> (<%= current_location['zipcode']%>)</h2>
+  <% end %>
+</header>
+
+
+<%= gmaps(
+  :map_options => { :zoom => 11, :center_latitude => current_location['latitude'], :center_longitude => current_location['longitude'], :auto_zoom => false, :auto_adjust => false },
+  :markers => { :data => @rides, :options => {"custom_infowindow_class" => 'infobox' } }
+)%>
+
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+    Gmaps.map.infobox = function(boxText) {
+      return {
+         content: boxText
+        ,disableAutoPan: false
+        ,maxWidth: 0
+        ,pixelOffset: new google.maps.Size(-140, 0)
+        ,zIndex: null
+        ,boxStyle: { 
+          opacity: 1.0
+          ,width: "250px"
+          ,padding: "10px"
+           }
+        ,closeBoxMargin: "6px 6px 6px 6px"
+        ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        ,infoBoxClearance: new google.maps.Size(1, 1)
+        ,isHidden: false
+        ,pane: "floatPane"
+        ,enableEventPropagation: false
+      }
+    };
+  </script>
+<% end %>

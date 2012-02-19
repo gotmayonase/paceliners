@@ -10,11 +10,16 @@
  *
  *= require_self
  *= require gmaps4rails
+ *= require bootstrap
  *= require_tree .
 */
 
 
 @import url(http://fonts.googleapis.com/css?family=Sonsie+One);
+@font-face {
+  font-family: 'League Gothic';
+  src: url('/League Gothic.otf');
+}
 
 .navbar .brand {
   font-family: 'Sonsie One';
@@ -31,58 +36,106 @@
   margin: 0 auto;
 }
 
+#new_ride #map {
+  height: 200px;
+}
+#new_ride .map_container {
+  margin: 0 0 0 160px;
+}
+
 .infobox {
-  background-color: white;
+  background-color: #004F7D;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #004F7D;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  -moz-box-shadow: 0 0 5px 5px #888;
-  -webkit-box-shadow: 0 0 5px 5px#888;
-  box-shadow: 0 0 5px 5px #888;
+  -moz-box-shadow: 3px 3px 5px 2px #888;
+  -webkit-box-shadow: 3px 3px 5px 2px #888;
+  box-shadow: 3px 3px 5px 2px #888;
 }
 
 .infobox h2 {
-  font-size: 20px;
+  text-align: center;
+  color: #ed981f;
+  text-shadow: 1px 1px 2px #513103;
+  text-transform: uppercase;
+  font-size: 30px;
   padding-top: 15px;
-  padding-left: 32px;
-  font-family: 'Sonsie One';
+  font-family: 'League Gothic';
 }
 
+.ui-datepicker-year {
+  display: none;
+}
 .infobox p {
   margin: 0;
+  color: #ed981f;
+  font-weight: bold;
+}
+
+.infobox a {
+  text-decoration: none;
+  border-bottom: 1px dotted #ed981f;
+}
+
+.infobox a:hover {
+  border-bottom: 1px solid #ed981f;
+  text-decoration: none;
+}
+
+.infobox a, .infobox a:hover {
+  color: #ed981f;
 }
 
 .infobox p span {
   display: inline-block;
   width: 120px;
   font-weight: bold;
+  color: #70a101;
+  text-shadow: 0px 1px 1px #513103;
 }
 
-.infobox p .address {
+.infobox .addressBox .address {
   width: auto;
-  margin-left: 30px;
-  font-weight: normal
+  color: #ed981f;
+  font-weight: bold;
+  text-shadow: none;
+}
+.infobox .addressBox .addressExtraLine {
+  margin-left: 60px;
+  padding-left: 4px;
 }
 
-.infobox h2.road {
-  background: url(<%= asset_path 'road-bike-small.png' %>) bottom left no-repeat;
-}
-
-.infobox h2.mountain {
-  background: url(<%= asset_path 'mountain-bike-small.png' %>) bottom left no-repeat;
+.infobox .addressBox span{
+  width: 60px;
 }
 
 .map-header {
   text-align: center;
   width: 940px;
-  margin: 0 auto 15px;
+  margin: 30px auto 35px;
 }
 
-.map-header h1, .map-header h2 {
-  font-size: 24px;
-  color: #000;
+.map-header h1, .map-header h2{
+  width: auto;
+  font-family: 'League Gothic';
+  font-size: 60px;
+  color: #ed981f;
+  text-shadow: 1px 1px 2px #513103;
+  text-transform: uppercase;
+}
+
+.map-header h2 {
+  color: #70a101;
+  text-shadow: 1px 1px 2px #253501;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.map-header h1 span {
+  color: #70a101;
+  text-shadow: 1px 1px 2px #253501;
 }
 
 .navbar .navbar-inner {
@@ -124,6 +177,103 @@ footer {
   text-align: center;
 }
 
+footer p {
+  color: #fff;
+}
+
 .navbar [class^="icon-"] {
   margin-right: 2px;
+}
+
+body {
+  background: url(<%= asset_path 'mac_bg.png' %>) top left repeat-x;
+  padding-top: 10px;
+  background-color: #4f99d2
+}
+
+header h1 {
+  width: 706px;
+  margin: 0 auto;
+}
+
+#buttonContainer {
+  width: 920px;
+  margin: 40px auto 0;
+  padding: 0
+}
+
+#buttonContainer a{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+}
+
+#addARide {
+  width: 460px;
+  height: 420px;
+  background: url(<%= asset_path 'add_a_ride_button.png' %>) top left no-repeat;
+}
+
+#addARide:hover {
+  background-position: 0px -419px;
+}
+
+#findARide {
+  width: 460px;
+  height: 420px;
+  background: url(<%= asset_path 'find_a_ride_button.png' %>) top left no-repeat;
+}
+
+#findARide:hover {
+  background-position: 0px -420px;
+}
+
+.content .map_container {
+  border-color: #517601;
+  background: #70a101;
+}
+
+image {
+  max-width: none;
+}
+
+// Forms
+
+
+.form-header {
+  text-align: center;
+  margin: 30px auto 35px;
+}
+
+.form-header h1 {
+  width: auto;
+  font-family: 'League Gothic';
+  font-size: 60px;
+  color: #ed981f;
+  text-shadow: 1px 1px 2px #513103;
+  text-transform: uppercase;
+}
+
+form legend {
+  font-family: 'League Gothic';
+  font-size: 36px;
+  margin-left: 160px;
+  border: none;
+  width: 200px;
+}
+
+form legend a {
+  text-decoration: underline;
+  color: #333;
+}
+
+form legend a i {
+  margin-top: 10px;
+}
+
+.adv-opts-container {
+  display: none;
+  margin-top: 30px;
+  padding-top: 30px;
 }
