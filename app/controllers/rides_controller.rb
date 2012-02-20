@@ -1,7 +1,14 @@
 class RidesController < ApplicationController
   
   def index
-    @rides = Ride.near([current_location['latitude'], current_location['longitude']]).to_gmaps4rails
+    lat = params[:latitude].blank? ? current_location['latitude'] : params[:latitude]
+    lng = params[:longitude].blank? ? current_location['longitude'] : params[:longitude]
+    @rides = Ride.near([lat, lng])
+    @rides_json = @rides.to_gmaps4rails
+    respond_to do |format|
+      format.html { render }
+      format.json { render :json => @rides_json }
+    end
   end
   
   def new

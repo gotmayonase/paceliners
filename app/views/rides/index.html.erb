@@ -9,17 +9,44 @@
   <h2><%= current_location['city']%>, <%= current_location['region_code']%> (<%= current_location['zipcode']%>)</h2>
   <% end %>
 </header>
-
+<div class="ridesCount">
+  <p>We found <span><%= @rides.size %> rides</span> in your area</p>
+</div>
+<div class="span8" style="float: none; margin-left: 180px">
+  <input type="text" id="location" class="span8" placeholder="Search by address or location name"/>
+</div>
+<%= gmaps(
+  :map_options => { :zoom => 11, :center_latitude => current_location['latitude'], :center_longitude => current_location['longitude'], :auto_zoom => false, :auto_adjust => false, :libraries => ['places'] },
+  :markers => { :data => @rides_json, :options => {"custom_infowindow_class" => 'infobox', :list_container => 'ridesTable' } }
+)%>
 <div class="span4 offset8 addLink" style="float: none;">
   <p>Don't see a ride you're looking for? <a href="/rides/add">Add it!</a>
 </div>
-<%= gmaps(
-  :map_options => { :zoom => 11, :center_latitude => current_location['latitude'], :center_longitude => current_location['longitude'], :auto_zoom => false, :auto_adjust => false },
-  :markers => { :data => @rides, :options => {"custom_infowindow_class" => 'infobox' } }
-)%>
+
+<table class="table table-bordered table-striped" id="ridesTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bike Type</th>
+      <th>Location</th>
+      <th>Days of the Week</th>
+      <th>Time of Day</th>
+      <th>Distance</th>
+      <th>Average Pace</th>
+      <th>Group Size</th>
+      <th>Drop?</th>
+      <th>Website</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
+    $(function(){
+      $('.tip').live('tooltip');
+    });
     Gmaps.map.infobox = function(boxText) {
       return {
          content: boxText
@@ -40,5 +67,21 @@
         ,enableEventPropagation: false
       }
     };
+    var autocomplete_input = document.getElementById('location');
+    var options = {};
+    var autocomplete = new google.maps.places.Autocomplete(autocomplete_input, options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      var place = autocomplete.getPlace();
+      Gmaps.map.map.setCenter(place.geometry.location);
+      Gmaps.map.map.setZoom(10);
+      $('.map-header h2').slideUp();
+      
+      $.get('/rides.json', { latitude: place.geometry.location.lat(), longitude: place.geometry.location.lng() }, function(data) {
+        Gmaps.map.replaceMarkers(data);
+        $('.ridesCount span').html(data.length == 1 ? '1 ride' : (data.length + ' rides'));
+      });
+    });
   </script>
 <% end %>
+
+<%= content_for :page_title, 'Find cycling group rides in your area'%>

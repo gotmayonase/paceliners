@@ -31,6 +31,7 @@ class Ride < ActiveRecord::Base
     info = <<-INFOWINDOW
       <h2 class="#{bike_type}"><i class="icon-plus"></i> #{name}</h2>
       <div>
+      <p><span>Bike Type:</span> #{bike_type}</p>
       <p><span>Days of the Week:</span> <a href="#" title="#{day_of_week.split(',').map { |d| DAYS[d]}.join(',')}" class="tip" onmouseover="$(this).tooltip('toggle')">#{day_of_week}</a></p>
       <p><span>Time of Day:</span> #{time_of_day.getlocal.strftime('%I:%M %p')}</p>
       <p><span>Distance:</span> #{ride_distance} miles</p>
@@ -46,6 +47,21 @@ class Ride < ActiveRecord::Base
     info << "<p><a href='#{url}'>More info</a></p>" if url
     info << "</div>"
     info
+  end
+  
+  def gmaps4rails_sidebar
+    <<-SIDEBAR
+    <td>#{ name }</td>
+    <td>#{ bike_type }</td>
+    <td>#{ address_name || full_street_address }</td>
+    <td>#{ day_of_week }</td>
+    <td>#{ time_of_day.getlocal.strftime('%I:%M %p') }</td>
+    <td>#{ ride_distance } miles</td>
+    <td>#{ average_pace.to_s + ' mph' unless average_pace.blank? }</td>
+    <td>#{ average_size }</td>
+    <td>#{ drop ? 'Yes' : 'No' }</td>
+    <td>#{"<a href='#{url}' target='_blank'>#{url}</a>" unless url.blank? }
+    SIDEBAR
   end
   
   def drop_string
