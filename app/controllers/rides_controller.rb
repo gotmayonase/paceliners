@@ -25,4 +25,13 @@ class RidesController < ApplicationController
     
   end
   
+  def check_similar
+    @rides = Ride.near([params[:ride][:latitude], params[:ride][:longitude]], 1)
+    if @rides.blank?
+      render :status => 404, :nothing => true
+    else
+      render :layout => false
+    end
+  end
+  
 end

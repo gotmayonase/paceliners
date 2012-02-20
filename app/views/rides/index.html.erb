@@ -10,7 +10,9 @@
   <% end %>
 </header>
 
-
+<div class="span4 offset8 addLink" style="float: none;">
+  <p>Don't see a ride you're looking for? <a href="/rides/add">Add it!</a>
+</div>
 <%= gmaps(
   :map_options => { :zoom => 11, :center_latitude => current_location['latitude'], :center_longitude => current_location['longitude'], :auto_zoom => false, :auto_adjust => false },
   :markers => { :data => @rides, :options => {"custom_infowindow_class" => 'infobox' } }

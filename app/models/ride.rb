@@ -29,7 +29,8 @@ class Ride < ActiveRecord::Base
   
   def gmaps4rails_infowindow
     info = <<-INFOWINDOW
-      <h2 class="#{bike_type}">#{name}</h2>
+      <h2 class="#{bike_type}"><i class="icon-plus"></i> #{name}</h2>
+      <div>
       <p><span>Days of the Week:</span> <a href="#" title="#{day_of_week.split(',').map { |d| DAYS[d]}.join(',')}" class="tip" onmouseover="$(this).tooltip('toggle')">#{day_of_week}</a></p>
       <p><span>Time of Day:</span> #{time_of_day.getlocal.strftime('%I:%M %p')}</p>
       <p><span>Distance:</span> #{ride_distance} miles</p>
@@ -43,6 +44,7 @@ class Ride < ActiveRecord::Base
       #{infowindow_address}
     </p>"
     info << "<p><a href='#{url}'>More info</a></p>" if url
+    info << "</div>"
     info
   end
   

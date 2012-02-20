@@ -96,6 +96,10 @@
   text-shadow: 0px 1px 1px #513103;
 }
 
+.infobox i {
+  display: none;
+}
+
 .infobox .addressBox .address {
   width: auto;
   color: #ed981f;
@@ -138,28 +142,19 @@
   text-shadow: 1px 1px 2px #253501;
 }
 
-.navbar .navbar-inner {
-  background-color: #104E8B;
-  background-image: -moz-linear-gradient(top, #003D9A, #103E8B);
-  background-image: -ms-linear-gradient(top, #003D9A, #103E8B);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#003D9A), to(#103E8B));
-  background-image: -webkit-linear-gradient(top, #003D9A, #103E8B);
-  background-image: -o-linear-gradient(top, #003D9A, #103E8B);
-  background-image: linear-gradient(top, #003D9A, #103E8B);
-}
-
 #navigation-bar .nav > li > a {
   color: #ccc;
   padding: 5px;
   font-weight: bold;
 }
 
-#navigation-bar .nav > li:hover > a{
+#navigation-bar .nav > li:hover > a, #navigation-bar .nav > li.active > a{
   color: #fff;
+  background-color: transparent;
 }
 
-#navigation-bar .nav > li:hover {
-  background-color: #002B49;
+#navigation-bar .nav > li:hover, #navigation-bar .nav > li.active {
+  background-color: #325FAD;
   color: #fff;
 }
 
@@ -168,7 +163,7 @@
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  background-color: #325FAD;
+  //background-color: #325FAD;
   margin-right: 10px
 }
 
@@ -238,6 +233,23 @@ image {
   max-width: none;
 }
 
+.container .addLink {
+  margin-left: 740px;
+}
+
+.addLink a{
+  color: #ed981f;
+  font-weight: bold;
+}
+
+.addLink p {
+  color: white;
+}
+
+.addLink a:hover {
+  color: #70a101;
+}
+
 // Forms
 
 
@@ -276,4 +288,49 @@ form legend a i {
   display: none;
   margin-top: 30px;
   padding-top: 30px;
+}
+
+// Modal Styles
+
+#similarRides ul {
+  margin-left: 0;
+}
+
+#similarRides ul li {
+  list-style-type: none;
+}
+
+#similarRides .infobox {
+  text-align: left
+}
+
+#similarRides .infobox h2 {
+  padding-top: 0;
+  text-align: left;
+  width: auto;
+  cursor: pointer;
+}
+
+#similarRides .infobox div {
+  display: none;
+}
+
+#similarRides .infobox i {
+  display: block;
+  cursor: pointer;
+  float: left;
+  margin-top: 10px;
+  margin-right: 5px;
+  background-color: #ed981f;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+#similarRides .infobox .addressBox span{
+  width: 120px;
+}
+
+#similarRides .infobox .addressBox .address{
+  width: auto;
 }

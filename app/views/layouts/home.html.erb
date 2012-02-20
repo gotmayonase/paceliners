@@ -25,18 +25,16 @@
       <header>
         <h1><a href="/"><%= image_tag 'logo.png' %></a></h1>
       </header>
-        <div class="content">
-          <div class="row">
-            <div class="span12">
-              
-            <%= yield %>
-            </div>
+      <div class="content">
+        <div class="row">
+          <div class="span12">
+            
+          <%= yield %>
           </div>
         </div>
+      </div>
 
-      <footer>
-        <p>&copy; Paceliners 2012</p>
-      </footer>
+      <%= render :partial => 'layouts/footer' %>
 
     </div> <!-- /container -->
 

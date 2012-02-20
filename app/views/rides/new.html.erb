@@ -23,6 +23,10 @@
         $('.locationEntry').hide();
         $('#' + id).show();
       });
+      
+      $(document).ajaxError(function(){
+        return false;
+      });
     });
     var map;
     var service;
@@ -61,8 +65,6 @@
 
         marker.setPosition(place.geometry.location);
         
-        console.log(place);
-        
         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address);
         infowindow.open(map, marker);
 
@@ -70,33 +72,23 @@
         $('#ride_longitude').val(place.geometry.location.lng());
         $('#ride_address_name').val($(autocomplete_input).val());
         
-        service.getDetails
+        $.get('/rides/check_similar', $('form').serialize(), function(data) {
+          $('#similarRides .modal-body').html(data);
+          $('#similarRides').modal();
+        });
       });
       
       google.maps.event.addDomListener(autocomplete_input, 'keydown', function(e) { 
-        if (e.keyCode == 13) 
-        { 
-          if (e.preventDefault) 
-          { 
+        if (e.keyCode == 13) {
+          if (e.preventDefault) {
             e.preventDefault(); 
           } 
-          else 
-          { 
-            // Since the google event handler framework does not handle 
+          else {
             e.cancelBubble = true; 
             e.returnValue = false; 
-          } 
-        } 
-      });
-    }
-
-    function callback(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-          var place = results[i];
-          createMarker(results[i]); 
+          }
         }
-      }
+      });
     }
   </script>
 <% end %>
@@ -271,5 +263,15 @@
         <button type="submit" class='btn btn-primary btn-large'>Save Your Ride</save>
       </div>
     </form>
+  </div>
+  <div class="modal hide fade" id="similarRides" style="display: none;">
+    <div class="modal-header">
+      <h3>Similar Rides Found</h3>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <a href="#" class='btn' onclick="$('#similarRides').modal('hide')">Close</a>
+    </div>
   </div>
 </div>

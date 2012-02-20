@@ -1,0 +1,21 @@
+<script type="text/javascript">
+  $(function(){
+    $('.infobox h2').click(function(){
+      $(this).siblings('div').slideToggle();
+      var $icon = $('i', this);
+      if($icon.hasClass('icon-plus')){
+        $icon.addClass('icon-minus');
+        $icon.removeClass('icon-plus');
+      } else {
+        $icon.addClass('icon-plus');
+        $icon.removeClass('icon-minus');
+      }
+    })
+  });
+</script>
+
+<ul>
+  <% @rides.each do |ride| %>
+  <li class="infobox"><%= raw ride.gmaps4rails_infowindow%></li>
+  <% end %>
+</ul>

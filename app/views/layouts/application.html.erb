@@ -33,11 +33,11 @@
             <span class="i-bar"></span>
           </a>
           <%= image_tag('bike_icon_white_30.png', :class => 'icon') %>
-          <a class="brand" href="#">Paceliners</a>
+          <a class="brand" href="/">Paceliners</a>
           <div class="container nav-collapse">
             <ul class="nav nav-pills">
-              <li><a href="/rides" id="find-rides">Find Local Rides</a></li>
-              <li><a href="/rides/add" id="add-a-ride">Add a Ride</a></li>
+              <li class="<%= 'active' if request.path == '/rides' %>"><a href="/rides" id="find-rides">Find Local Rides</a></li>
+              <li class="<%= 'active' if ['/rides/add', '/rides/new'].include? request.path %>"><a href="/rides/add" id="add-a-ride">Add a Ride</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -53,9 +53,7 @@
         </div>
       </div>
 
-      <footer>
-        <p>&copy; Paceliners 2012</p>
-      </footer>
+      <%= render :partial => 'layouts/footer' %>
 
     </div> <!-- /container -->
 
