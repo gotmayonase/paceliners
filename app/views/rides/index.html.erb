@@ -51,23 +51,6 @@
   <script type="text/javascript">
     $(function(){
       $('.tip').live('tooltip');
-      $('#ridesSearch button').click(function(){
-        var e = jQuery.Event('keydown');
-        e.keyCode = 13;
-        e.charCode = 13;
-        e.which = 13;
-        $('#location').trigger(e);
-        e = jQuery.Event('keyup');
-        e.keyCode = 13;
-        e.charCode = 13;
-        e.which = 13;
-        $('#location').trigger(e);
-        e = jQuery.Event('keypress');
-        e.keyCode = 13;
-        e.charCode = 13;
-        e.which = 13;
-        $('#location').trigger(e);
-      })
     });
     Gmaps.map.infobox = function(boxText) {
       return {
