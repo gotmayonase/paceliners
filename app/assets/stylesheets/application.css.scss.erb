@@ -14,6 +14,11 @@
  *= require_tree .
 */
 
+$light-blue: #1489CB;
+$light-blue-border: darken($light-blue, 40%);
+$orange: #CB7400;
+$orange-border: darken($orange, 30%);
+$dark-blue: #004F7D;
 
 @import url(http://fonts.googleapis.com/css?family=Sonsie+One);
 @font-face {
@@ -31,9 +36,90 @@
   margin-top: 3px;
 }
 
-.map_container {
-  width: 940px;
+.container .map_container {
+  width: 100%;
   margin: 0 auto;
+}
+
+.content .map_container {
+  border-color: $light-blue;
+  background: $light-blue;
+  width: auto;
+  padding: 6px;
+}
+
+.ridesListContainer {
+  padding: 15px 6px 15px 6px;
+  background-color: #D9D2CA;  
+  border-width: 1px;
+  border-style: solid;
+  -moz-box-shadow: inset 0 0 5px #999;
+  -webkit-box-shadow: inset 0 0 5px#999;
+  box-shadow: inner 0 0 5px #999;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border-color: lighten($orange, 5%);
+}
+
+#ridesList {
+  list-style-type: none;
+  height: 382px;
+}
+
+#ridesList li {
+  background-color: $dark-blue;
+  margin-bottom: 10px;
+  text-align: center;
+  position: relative;
+}
+
+#ridesList li div {
+  padding: 10px 0 10px 0;
+  width: 100%;
+}
+
+#ridesList li a:hover {
+  text-decoration: none;
+}
+
+#ridesList li:hover {
+  background-color: $orange;
+  span, p {
+    color: $dark-blue;
+    text-shadow: 1px 1px 2px #000;
+  }
+}
+
+#ridesList li i {
+  position: absolute;
+  right: 5px;
+  bottom: 40%;
+}
+
+#ridesList li:hover i {
+  background-image: url(/assets/twitter/bootstrap/glyphicons-halflings.png);
+}
+
+#ridesList li p {
+  color: $orange;
+  text-shadow: 1px 1px 2px $orange-border;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-family: 'League Gothic';
+}
+
+#ridesList li span {
+  color: $orange;
+  text-shadow: 1px 1px 2px $orange-border;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-family: 'League Gothic';
+  letter-spacing: 1px;
+}
+
+.container #map {
+  width: 100%;
 }
 
 #new_ride #map {
@@ -57,8 +143,8 @@
 
 .infobox h2 {
   text-align: center;
-  color: #ed981f;
-  text-shadow: 1px 1px 2px #513103;
+  color: $orange;
+  text-shadow: 1px 1px 2px $orange-border;
   text-transform: uppercase;
   font-size: 30px;
   padding-top: 15px;
@@ -70,30 +156,30 @@
 }
 .infobox p {
   margin: 0;
-  color: #ed981f;
+  color: $orange;
   font-weight: bold;
 }
 
 .infobox a {
   text-decoration: none;
-  border-bottom: 1px dotted #ed981f;
+  border-bottom: 1px dotted $orange;
 }
 
 .infobox a:hover {
-  border-bottom: 1px solid #ed981f;
+  border-bottom: 1px solid $orange;
   text-decoration: none;
 }
 
 .infobox a, .infobox a:hover {
-  color: #ed981f;
+  color: $orange;
 }
 
 .infobox p span {
   display: inline-block;
   width: 120px;
   font-weight: bold;
-  color: #70a101;
-  text-shadow: 0px 1px 1px #513103;
+  color: $light-blue;
+  text-shadow: 0px 1px 1px $orange-border;
 }
 
 .infobox i {
@@ -102,7 +188,7 @@
 
 .infobox .addressBox .address {
   width: auto;
-  color: #ed981f;
+  color: $orange;
   font-weight: bold;
   text-shadow: none;
 }
@@ -117,29 +203,29 @@
 
 .map-header {
   text-align: center;
-  width: 940px;
-  margin: 10px auto 30px;
+  margin-bottom: 30px;
+  margin-top: 10px;
 }
 
 .map-header h1, .map-header h2{
   width: auto;
   font-family: 'League Gothic';
   font-size: 60px;
-  color: #ed981f;
-  text-shadow: 1px 1px 2px #513103;
+  color: $orange;
+  text-shadow: 1px 1px 2px $orange-border;
   text-transform: uppercase;
 }
 
 .map-header h2 {
-  color: #70a101;
-  text-shadow: 1px 1px 2px #253501;
+  color: lighten($light-blue, 10%);
+  text-shadow: 1px 1px 2px $light-blue-border;
   font-size: 30px;
   margin-top: 10px;
 }
 
 .map-header h1 span {
-  color: #70a101;
-  text-shadow: 1px 1px 2px #253501;
+  color: $light-blue;
+  text-shadow: 1px 1px 2px $light-blue-border;
 }
 
 #navigation-bar .nav > li > a {
@@ -190,6 +276,18 @@ header h1 {
   margin: 0 auto;
 }
 
+header {
+  text-align: center;
+}
+
+header h2 {
+  color: $orange;
+  font-size: 40px;
+  text-shadow: 1px 3px 3px #000;
+  font-family: 'League Gothic';
+  text-transform: uppercase;
+}
+
 #buttonContainer {
   width: 920px;
   margin: 40px auto 0;
@@ -223,21 +321,13 @@ header h1 {
   background-position: 0px -420px;
 }
 
-.content .map_container {
-  border-color: #517601;
-  background: #70a101;
-}
-
 image {
   max-width: none;
 }
 
-.container .addLink {
-  margin-left: 740px;
-}
 
 .addLink a{
-  color: #ed981f;
+  color: $orange;
   font-weight: bold;
 }
 
@@ -246,11 +336,7 @@ image {
 }
 
 .addLink a:hover {
-  color: #70a101;
-}
-
-.content .ridesCount {
-  float: none;
+  color: $light-blue;
 }
 
 .ridesCount p{
@@ -261,8 +347,36 @@ image {
   float: none;
 }
 
-// Forms
+.ridesCount p span {
+  color: lighten($orange, 5%);
+}
 
+#ridesSearch {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#ridesSearch button {
+  position: absolute;
+  right: -16px;
+  top: 0px;
+  font-family: 'League Gothic';
+  font-size: 30px;
+  height: 50px;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  color: $light-blue;
+}
+
+#ridesSearch input {
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  margin-left: -10px;
+}
+
+// Forms
 
 .form-header {
   text-align: center;
@@ -273,8 +387,8 @@ image {
   width: auto;
   font-family: 'League Gothic';
   font-size: 60px;
-  color: #ed981f;
-  text-shadow: 1px 1px 2px #513103;
+  color: $orange;
+  text-shadow: 1px 1px 2px $orange-border;
   text-transform: uppercase;
 }
 
@@ -332,7 +446,7 @@ form legend a i {
   float: left;
   margin-top: 10px;
   margin-right: 5px;
-  background-color: #ed981f;
+  background-color: $orange;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -347,19 +461,19 @@ form legend a i {
 }
 
 footer a {
-  color: #70a101;
+  color: $light-blue;
 }
 footer a:hover {
-  color: #70a101;
+  color: $light-blue;
 }
 
 #ridesTable {
   background-color: #fff;
-  border: 3px solid #70a101;
+  border: 3px solid $light-blue;
 }
 
 #ridesTable td, #ridesTable th {
-  border-color: #517601;
+  border-color: $light-blue;
   text-align: center;
 }
 
@@ -371,7 +485,7 @@ footer a:hover {
   font-family: 'League Gothic';
   font-size: 24px;
   text-align: center;
-  background-color: #ed981f;
+  background-color: $orange;
 }
 
 #ridesTable tbody tr:nth-child(odd) td, #ridesTable tbody tr:nth-child(odd) th {
@@ -379,7 +493,7 @@ footer a:hover {
 }
 
 #ridesTable tbody tr:hover td, .table tbody tr:hover th {
-  background-color: #70a101;
+  background-color: $light-blue;
   cursor: pointer;
 }
 
@@ -399,7 +513,7 @@ footer a:hover {
 
 #about a {
   font-weight: bold;
-  color: #70a101;
+  color: $light-blue;
 }
 
 #share {
@@ -407,7 +521,7 @@ footer a:hover {
   right: 0px;
   top: -25px;
   z-index:1000;
-  background-color: #517601;
+  background-color: $light-blue;
 }
 
 #feedback {
@@ -415,7 +529,7 @@ footer a:hover {
   right: 80px;
   top: -25px;
   z-index:1000;
-  background-color: #517601;
+  background-color: $light-blue;
 }
 
 #feedback ul {

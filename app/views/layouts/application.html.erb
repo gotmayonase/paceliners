@@ -26,15 +26,15 @@
   <body>
     <div class="navbar navbar-fixed-top" id="navigation-bar">
       <div class="navbar-inner">
-          <div class="container">
+        <div class="container">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="i-bar"></span>
             <span class="i-bar"></span>
             <span class="i-bar"></span>
           </a>
-          <%= image_tag('bike_icon_white_30.png', :class => 'icon') %>
-          <a class="brand" href="/">Paceliners</a>
           <div class="container nav-collapse">
+            <%= image_tag('bike_icon_white_30.png', :class => 'icon') %>
+            <a class="brand" href="/">Paceliners</a>
             <ul class="nav nav-pills">
               <li class="<%= 'active' if request.path == '/rides' %>"><a href="/rides" id="find-rides">Find Local Rides</a></li>
               <li class="<%= 'active' if ['/rides/add', '/rides/new'].include? request.path %>"><a href="/rides/add" id="add-a-ride">Add a Ride</a></li>
@@ -55,8 +55,7 @@
       <div class="content">
         <div class="row">
           <div class="span12">
-            
-          <%= yield %>
+            <%= yield %>
           </div>
         </div>
       </div>
@@ -71,10 +70,18 @@
     <%= javascript_include_tag "application" %>
     <script type="text/javascript">
       $(function(){
-        
         $('.slideMenuLink').click(function(){
-          $(this).parents('li').toggleClass('active');
-          $('#' + $(this).attr('rel')).slideToggle(200);
+          var $li = $(this).parents('li');
+          var visible = $li.hasClass('active');
+          $('.slideMenuLink').parents('li').removeClass('active');
+          $('.slideMenu').slideUp(200);
+          
+          if(!visible) {
+            $menu = $('#' + $(this).attr('rel'));
+            $menu.slideToggle(200);
+            $li.addClass('active');
+          }
+
           return false;
         });
       })

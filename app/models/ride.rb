@@ -51,16 +51,11 @@ class Ride < ActiveRecord::Base
   
   def gmaps4rails_sidebar
     <<-SIDEBAR
-    <td>#{ name }</td>
-    <td>#{ bike_type }</td>
-    <td>#{ address_name || full_street_address }</td>
-    <td>#{ day_of_week }</td>
-    <td>#{ time_of_day.getlocal.strftime('%I:%M %p') }</td>
-    <td>#{ ride_distance } miles</td>
-    <td>#{ average_pace.to_s + ' mph' unless average_pace.blank? }</td>
-    <td>#{ average_size }</td>
-    <td>#{ drop ? 'Yes' : 'No' }</td>
-    <td>#{"<a href='#{url}' target='_blank'>#{url}</a>" unless url.blank? }
+    <div>
+      <p>#{ name }</p>
+      <span>#{ ride_distance } miles</span>
+      <i class="icon-chevron-right icon-white"></i>
+    </div
     SIDEBAR
   end
   

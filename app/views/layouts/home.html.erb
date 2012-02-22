@@ -24,12 +24,12 @@
     <div class="container">
       <header>
         <h1><a href="/"><%= image_tag 'logo.png' %></a></h1>
+        <h2><%= Tagline.order('random()').first %></h2>
       </header>
       <div class="content">
         <div class="row">
           <div class="span12">
-            
-          <%= yield %>
+            <%= yield %>
           </div>
         </div>
       </div>
