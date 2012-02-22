@@ -89,6 +89,9 @@
         ,enableEventPropagation: false
       }
     };
+    Gmaps.map.callback = function() {
+      Gmaps.map.map_options.scrollwheel = false;
+    };
     var autocomplete_input = document.getElementById('location');
     var options = {};
     var autocomplete = new google.maps.places.Autocomplete(autocomplete_input, options);

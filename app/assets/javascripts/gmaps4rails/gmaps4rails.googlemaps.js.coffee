@@ -89,6 +89,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       disableDefaultUI:       @map_options.disableDefaultUI
       disableDoubleClickZoom: @map_options.disableDoubleClickZoom
       draggable:              @map_options.draggable
+      scrollwheel:            false
 
     mergedOptions = @mergeObjectWithDefault @map_options.raw, defaultOptions
     
