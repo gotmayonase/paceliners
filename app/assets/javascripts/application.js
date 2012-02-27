@@ -18,6 +18,7 @@
 //= require gmaps4rails/openlayers.js
 //= require gmaps4rails/all_apis.js
 //= require twitter/bootstrap
+//= require jquery.jcarousel
 
 // Gmaps4Rails.prototype.createSidebar = function(marker_container) {
 //   var aSel, currentMap, html, li, ul, tbody;

@@ -36,8 +36,16 @@
             <%= image_tag('bike_icon_white_30.png', :class => 'icon') %>
             <a class="brand" href="/">Paceliners</a>
             <ul class="nav nav-pills">
-              <li class="<%= 'active' if request.path == '/rides' %>"><a href="/rides" id="find-rides">Find Local Rides</a></li>
-              <li class="<%= 'active' if ['/rides/add', '/rides/new'].include? request.path %>"><a href="/rides/add" id="add-a-ride">Add a Ride</a></li>
+              <li class="<%= 'active' if request.path == '/rides' %>">
+                <a href="/rides" id="find-rides">
+                  <i class="icon-search icon-white"></i>Find Local Rides
+                </a>
+              </li>
+              <li class="<%= 'active' if ['/rides/add', '/rides/new'].include? request.path %>">
+                <a href="/rides/add" id="add-a-ride">
+                  <i class="icon-plus icon-white"></i>Add a Ride
+                </a>
+              </li>
             </ul>
             <ul class="nav pull-right">
               <li><a id="feedbackLink" class="slideMenuLink" href="javascript:void(0)" rel="feedback">Leave Feedback</a></li>

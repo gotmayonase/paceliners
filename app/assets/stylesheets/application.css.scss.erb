@@ -19,6 +19,7 @@ $light-blue-border: darken($light-blue, 40%);
 $orange: #CB7400;
 $orange-border: darken($orange, 30%);
 $dark-blue: #004F7D;
+$map-background-color: lighten($orange, 20%);
 
 @import url(http://fonts.googleapis.com/css?family=Sonsie+One);
 @font-face {
@@ -42,36 +43,116 @@ $dark-blue: #004F7D;
 }
 
 .content .map_container {
-  border-color: $light-blue;
-  background: $light-blue;
+  border-color: $map-background-color;
+  background: $map-background-color;
   width: auto;
   padding: 6px;
+  -moz-box-shadow: 0px 3px 5px #222;
+  -webkit-box-shadow: 0px 3px 5px #222;
+  box-shadow: 0px 3px 5px #222;
 }
 
 .ridesListContainer {
-  padding: 15px 6px 15px 6px;
-  background-color: #D9D2CA;  
+  padding: 0px 0px 0px 0px;
+  background-color: $map-background-color;  
   border-width: 1px;
   border-style: solid;
-  -moz-box-shadow: inset 0 0 5px #999;
-  -webkit-box-shadow: inset 0 0 5px#999;
-  box-shadow: inner 0 0 5px #999;
+  #-moz-box-shadow: inset 0 0 5px #999;
+  #-webkit-box-shadow: inset 0 0 5px#999;
+  #box-shadow: inner 0 0 5px #999;
+  -moz-box-shadow: 0px 3px 5px #222;
+  -webkit-box-shadow: 0px 3px 5px #222;
+  box-shadow: 0px 3px 5px #222;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  border-color: lighten($orange, 5%);
+  overflow: hidden;
+  border: none;
+  text-align: center;
+  height: 413px;
+}
+
+.ridesListContainer.zeroState {
+  background: #004f7d; /* Old browsers */
+  background: -moz-linear-gradient(top, #004f7d 0%, #09527c 33%, #24678c 66%, #006ba5 99%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#004f7d), color-stop(33%,#09527c), color-stop(66%,#24678c), color-stop(99%,#006ba5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* IE10+ */
+  background: linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* W3C */
+}
+
+#zeroStateMessage {
+  display: none;
+}
+
+.zeroState #zeroStateMessage {
+  display: block;
+  color: $orange;
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  h3 {
+    font-size: 20px;
+  }
+  h3, h4 {
+    color: lighten($orange, 10%);
+  }
+  a {
+    color: lighten($light-blue, 10%);
+  }
+}
+
+.ridesListContainer button {
+  width: 100%;
+  margin: 0 auto;
+  height: 40px;
+  padding: 2px 10px 2px;
+}
+
+.ridesListContainer button.jcarousel-prev-disabled i, .ridesListContainer button.jcarousel-next-disabled i{
+  background-image: url(/assets/twitter/bootstrap/glyphicons-halflings-white.png);
+}
+
+#ridesCarousel {
+  position: relative;
+  height: 335px;
+  overflow: hidden;
+}
+
+#ridesListPrev {
+  margin-top: 0px;
+  -webkit-border-radius: 8px 8px 0px 0px;
+  -moz-border-radiust: 8px 8px 0px 0px;
+  border-radius: 8px 8px 0px 0px;
+}
+
+#ridesListNext {
+  margin-bottom: 0px;
+  -webkit-border-radius: 0px 0px 8px 8px;
+  -moz-border-radiust: 0px 0px 8px 8px;
+  border-radius: 0px 0px 8px 8px;
 }
 
 #ridesList {
   list-style-type: none;
-  height: 382px;
+  position: absolute;
+  right: 0px;
 }
 
 #ridesList li {
-  background-color: $dark-blue;
-  margin-bottom: 10px;
+  background: #004f7d; /* Old browsers */
+  background: -moz-linear-gradient(top, #004f7d 0%, #09527c 33%, #24678c 66%, #006ba5 99%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#004f7d), color-stop(33%,#09527c), color-stop(66%,#24678c), color-stop(99%,#006ba5)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* IE10+ */
+  background: linear-gradient(top, #004f7d 0%,#09527c 33%,#24678c 66%,#006ba5 99%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004f7d', endColorstr='#006ba5',GradientType=0 ); /* IE6-9 */
+  margin-bottom: 0px;
   text-align: center;
   position: relative;
+  height: 67px;
 }
 
 #ridesList li div {
@@ -84,9 +165,9 @@ $dark-blue: #004F7D;
 }
 
 #ridesList li:hover {
-  background-color: $orange;
+  background: $light-blue;
   span, p {
-    color: $dark-blue;
+    color: $orange;
     text-shadow: 1px 1px 2px #000;
   }
 }
@@ -204,7 +285,7 @@ $dark-blue: #004F7D;
 
 .map-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-top: 10px;
 }
 
@@ -212,9 +293,13 @@ $dark-blue: #004F7D;
   width: auto;
   font-family: 'League Gothic';
   font-size: 60px;
-  color: $orange;
+  color: white;
   text-shadow: 1px 1px 2px $orange-border;
   text-transform: uppercase;
+}
+
+.map-header h1 span {
+  color: $orange;
 }
 
 .map-header h2 {
@@ -222,11 +307,6 @@ $dark-blue: #004F7D;
   text-shadow: 1px 1px 2px $light-blue-border;
   font-size: 30px;
   margin-top: 10px;
-}
-
-.map-header h1 span {
-  color: $light-blue;
-  text-shadow: 1px 1px 2px $light-blue-border;
 }
 
 #navigation-bar .nav > li > a {
@@ -287,6 +367,7 @@ header h2 {
   text-shadow: 1px 3px 3px #000;
   font-family: 'League Gothic';
   text-transform: uppercase;
+  margin-top: 20px;
 }
 
 #buttonContainer {
@@ -326,6 +407,9 @@ image {
   max-width: none;
 }
 
+.addLink {
+  margin-top: 5px;
+}
 
 .addLink a{
   color: $orange;
@@ -374,7 +458,6 @@ image {
   height: 40px;
   font-size: 20px;
   padding-left: 10px;
-  margin-left: -10px;
 }
 
 // Forms
@@ -468,35 +551,6 @@ footer a:hover {
   color: $light-blue;
 }
 
-#ridesTable {
-  background-color: #fff;
-  border: 3px solid $light-blue;
-}
-
-#ridesTable td, #ridesTable th {
-  border-color: $light-blue;
-  text-align: center;
-}
-
-#ridesTable td a {
-
-}
-
-#ridesTable th {
-  font-family: 'League Gothic';
-  font-size: 24px;
-  text-align: center;
-  background-color: $orange;
-}
-
-#ridesTable tbody tr:nth-child(odd) td, #ridesTable tbody tr:nth-child(odd) th {
-  background-color: #ccc;
-}
-
-#ridesTable tbody tr:hover td, .table tbody tr:hover th {
-  background-color: $light-blue;
-  cursor: pointer;
-}
 
 .container .slideMenu {
   display: none;
@@ -558,4 +612,13 @@ footer a:hover {
 
 .container {
   position: relative;
+}
+
+.jcarousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.jcarousel {
+  
 }
