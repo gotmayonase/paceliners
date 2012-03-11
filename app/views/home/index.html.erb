@@ -1,4 +1,28 @@
-<div id="buttonContainer">
-  <a id="findARide" href="/rides"></a>
-  <a id="addARide" href="/rides/add"></a>
+<div class="row-fluid">
+  <div class="span5">
+    <div class="left-column">
+      <a href="/">
+        <img id="homepage-logo" src="<%= asset_path 'homepage_logo.png' %>" />
+      </a>
+      <a href="/rides" id="find-a-group">
+        <img src="<%= asset_path 'find_a_group_button.png' %>" />
+      </a>
+      <a href="/rides/add" id="add-a-group">
+        <img src="<%= asset_path 'add_a_group_button.png' %>" />
+      </a>
+      
+      <p id="about1">
+        The cycling community is one of the biggest pulls for many cyclists, but it's often more difficult than it should be to find that community in some areas. In most cities you can find a weekly group ride hosted by a local club or bike shop, but only if you know where to look. 
+        Unfortunately there's no good central place for this information.
+      </p>
+      
+      <p id="about2">
+        Enter Paceliners. We want to make it easier for someone who is new to an area, or just getting into the cycling community, to find their local group rides. If you're looking for a ride, just check out our find a ride page for all the rides posted in your area. If you see a ride is missing, please add it so others can easily get involved.
+      </p>
+    </div>
+  </div>
+
+  <div class="span7 right-column">
+    <img id="map-icon" src="<%= asset_path 'map_image.png' %>" />
+  </div>
 </div>

@@ -22,22 +22,14 @@
     <link href="/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-
     <div class="container">
-      <header>
-        <h1><a href="/"><%= image_tag 'logo.png' %></a></h1>
-        <h2>Why bike alone? Find a group ride in your area.</h2>
-      </header>
       <div class="content">
-        <div class="row">
+        <div class="row-fluid">
           <div class="span12">
             <%= yield %>
           </div>
         </div>
       </div>
-
-      <%= render :partial => 'layouts/footer' %>
-
     </div> <!-- /container -->
 
     <!-- Le javascript
